@@ -1,4 +1,4 @@
-System.register(['@angular/core', "redis"], function(exports_1, context_1) {
+System.register(['@angular/core'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,25 +10,16 @@ System.register(['@angular/core', "redis"], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, redis_1;
+    var core_1;
     var HeaderService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
-            },
-            function (redis_1_1) {
-                redis_1 = redis_1_1;
             }],
         execute: function() {
             let HeaderService = class HeaderService {
                 connect() {
-                    var client = redis_1.createClient();
-                    console.log("init ");
-                    console.info("connection");
-                    client.on("connect", function (err, a) {
-                        console.log("Error " + err, a);
-                    });
                 }
             };
             HeaderService = __decorate([

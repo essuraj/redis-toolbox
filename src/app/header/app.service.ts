@@ -6,12 +6,12 @@ import {createClient}  from "redis";
 @Injectable()
 export class HeaderService {
     connect() {
-        var client = createClient();
-        console.log("init ");
-        console.info("connection");
-        client.on("connect", function (err, a) {
-            console.log("Error " + err, a);
-        });
+        // var client = createClient();
+        // console.log("init ");
+        // console.info("connection");
+        // client.on("connect", function (err, a) {
+        //     console.log("Error " + err, a);
+        // });
 
     }
 }

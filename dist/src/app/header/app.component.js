@@ -11,7 +11,7 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', './app.se
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var core_1, platform_browser_dynamic_1, app_service_1;
-    var HeaderComponent, ipc, closeEl;
+    var HeaderComponent;
     return {
         setters:[
             function (core_1_1) {
@@ -47,11 +47,6 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', './app.se
             ], HeaderComponent);
             exports_1("HeaderComponent", HeaderComponent);
             platform_browser_dynamic_1.bootstrap(HeaderComponent);
-            ipc = require('ipc');
-            closeEl = document.querySelector('.close');
-            closeEl.addEventListener('click', function () {
-                ipc.send('close-main-window');
-            });
         }
     }
 });
