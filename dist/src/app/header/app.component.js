@@ -24,28 +24,27 @@ System.register(['@angular/core', '@angular/platform-browser-dynamic', './app.se
                 app_service_1 = app_service_1_1;
             }],
         execute: function() {
-            HeaderComponent = (function () {
-                function HeaderComponent(service) {
+            let HeaderComponent = class HeaderComponent {
+                constructor(service) {
                     this.service = service;
                     this.name = "Suraj";
                     this.connection = {
                         host: "localhost", port: 6379
                     };
                 }
-                HeaderComponent.prototype.testConnection = function (data) {
+                testConnection(data) {
                     console.log(data);
                     this.service.connect();
-                };
-                HeaderComponent = __decorate([
-                    core_1.Component({
-                        selector: 'header',
-                        templateUrl: "src/app/header/header.html",
-                        providers: [app_service_1.HeaderService]
-                    }), 
-                    __metadata('design:paramtypes', [app_service_1.HeaderService])
-                ], HeaderComponent);
-                return HeaderComponent;
-            }());
+                }
+            };
+            HeaderComponent = __decorate([
+                core_1.Component({
+                    selector: 'header',
+                    templateUrl: "src/app/header/header.html",
+                    providers: [app_service_1.HeaderService]
+                }), 
+                __metadata('design:paramtypes', [app_service_1.HeaderService])
+            ], HeaderComponent);
             exports_1("HeaderComponent", HeaderComponent);
             platform_browser_dynamic_1.bootstrap(HeaderComponent);
             ipc = require('ipc');

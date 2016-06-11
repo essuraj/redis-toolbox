@@ -21,23 +21,20 @@ System.register(['@angular/core', "redis"], function(exports_1, context_1) {
                 redis_1 = redis_1_1;
             }],
         execute: function() {
-            HeaderService = (function () {
-                function HeaderService() {
-                }
-                HeaderService.prototype.connect = function () {
+            let HeaderService = class HeaderService {
+                connect() {
                     var client = redis_1.createClient();
                     console.log("init ");
                     console.info("connection");
                     client.on("connect", function (err, a) {
                         console.log("Error " + err, a);
                     });
-                };
-                HeaderService = __decorate([
-                    core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
-                ], HeaderService);
-                return HeaderService;
-            }());
+                }
+            };
+            HeaderService = __decorate([
+                core_1.Injectable(), 
+                __metadata('design:paramtypes', [])
+            ], HeaderService);
             exports_1("HeaderService", HeaderService);
         }
     }
