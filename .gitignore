@@ -2,3 +2,4 @@ node_modules
 typings
 *.map
 src/app/**/*.js
+dist
