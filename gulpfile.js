@@ -14,24 +14,24 @@ gulp.task('clean', function () {
 });
 
 // copy static assets - i.e. non TypeScript compiled source
-gulp.task('copy:assets', ['clean'], function() {
-  return gulp.src(['src/**/*', 'index.html', 'systemjs.config.js', '!src/app/**/*.ts'], { base : './' })
+gulp.task('copy:assets', ['clean'], function () {
+  return gulp.src(['src/**/*', 'index.html', 'systemjs.config.js', '!src/app/**/*.ts'], { base: './' })
     .pipe(gulp.dest('dist'))
 });
 
 // copy dependencies
-gulp.task('copy:libs', ['clean'], function() {
+gulp.task('copy:libs', ['clean'], function () {
   return gulp.src([
-      'node_modules/zone.js/dist/zone.js',
-      'node_modules/systemjs/dist/system.src.js',
-      'node_modules/reflect-metadata/Reflect.js',
-    ])
+    'node_modules/zone.js/dist/zone.js',
+    'node_modules/systemjs/dist/system.src.js',
+    'node_modules/reflect-metadata/Reflect.js',
+  ])
     .pipe(gulp.dest('dist/lib'))
 });
 
- 
+
 // linting
-gulp.task('tslint', function() {
+gulp.task('tslint', function () {
   return gulp.src('app/**/*.ts')
     .pipe(tslint())
     .pipe(tslint.report('verbose'));
@@ -41,7 +41,7 @@ gulp.task('tslint', function() {
 // TypeScript compile
 gulp.task('compile', ['clean'], function () {
   return gulp
-    .src(["./src/app/**/*.ts","./typings/index.d.ts"])
+    .src(["./src/app/**/*.ts", "./typings/index.d.ts"])
     .pipe(sourcemaps.init())
     .pipe(typescript(tscConfig.compilerOptions))
     .pipe(sourcemaps.write('.'))
@@ -57,7 +57,7 @@ gulp.task('tsconfig-glob', function () {
 });
 
 // Run browsersync for development
-gulp.task('serve', ['build'], function() {
+gulp.task('serve', ['build'], function () {
   browserSync({
     server: {
       baseDir: 'dist'
@@ -66,7 +66,14 @@ gulp.task('serve', ['build'], function() {
 
   gulp.watch(['app/**/*', 'index.html', 'styles.css'], ['buildAndReload']);
 });
+// get the dependencies
+var childProcess = require('child_process'),
+  electron = require('electron-prebuilt');
 
+// create the gulp task
+gulp.task('run', function () {
+  childProcess.spawn(electron, ['./start.js'], { stdio: 'inherit' });
+});
 gulp.task('build', ['tslint', 'compile', 'copy:libs', 'copy:assets']);
 gulp.task('buildAndReload', ['build'], reload);
 gulp.task('default', ['build']);
