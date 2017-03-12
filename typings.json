@@ -1,8 +1,0 @@
-{
-  "globalDependencies": {
-    "bluebird": "registry:dt/bluebird#2.0.0+20160701023356",
-    "jasmine": "registry:dt/jasmine#2.2.0+20160621224255",
-    "node": "registry:dt/node#6.0.0+20160709114037",
-    "redis": "registry:dt/redis#0.12.1+20160619023014"
-  }
-}

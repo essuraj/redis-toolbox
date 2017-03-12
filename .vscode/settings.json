@@ -3,16 +3,36 @@
     "files.exclude": {
         "**/.git": true,
         "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
         "**/.DS_Store": true,
-        "node_modules": true,
-        "typings": true,
-        "dist": true,
-        "**/*.map": true,
-        "**/*.js": {
-            "when": "$(basename).ts"
-        }
+        "node_modules":true
     },
-    "editor.glyphMargin": true,
-    "sass.validate": false,
-    "less.validate": false
+    "beautify.language": {
+        "js": {
+            "type": [
+                "javascript",
+                "json" 
+            ],
+            "filename": [
+                ".vue",
+                ".jshintrc",
+                ".jsbeautify"
+            ]
+        },
+        "css": [
+            "css",
+            "scss"
+        ],
+        "html": [
+            "htm",
+            "html",
+            "vue-html",
+            "vue"
+        ]
+    },
+    "emmet.syntaxProfiles": {
+        "vue-html": "html",
+        "vue": "html"
+    }
 }
