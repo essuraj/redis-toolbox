@@ -1,9 +1,9 @@
 <template>
   <div>
-    <nav class="nav">
+    <nav class="nav box is-paddingless">
       <div class="nav-left">
         <a class="nav-item">
-          <img src="./assets/logo.png" alt="electron-vue"> Redis toolbox
+          <img src="./assets/logo.png" alt="electron-vue"><span>&nbsp; Redis toolbox</span>
         </a>
       </div>
       <span class="nav-toggle">
@@ -71,23 +71,23 @@
   import {
     ipcRenderer
   } from 'electron'
-  import Notification from 'vue-bulma-notification'
+  // import Notification from 'vue-bulma-notification'
   import Vue from 'vue'
-  const NotificationComponent = Vue.extend(Notification)
+  // const NotificationComponent = Vue.extend(Notification)
 
-  const openNotification = (propsData = {
-    title: '',
-    message: '',
-    type: '',
-    direction: '',
-    duration: 4500,
-    container: '.notifications'
-  }) => {
-    return new NotificationComponent({
-      el: document.createElement('div'),
-      propsData
-    })
-  }
+  // const openNotification = (propsData = {
+  //   title: '',
+  //   message: '',
+  //   type: '',
+  //   direction: '',
+  //   duration: 1000,
+  //   container: '.bg'
+  // }) => {
+  //   return new NotificationComponent({
+  //     el: document.createElement('div'),
+  //     propsData
+  //   })
+  // }
 
   export default {
     data() {
@@ -113,20 +113,20 @@
         this.isConnected = op.success;
         this.connectMessage = op.message;
         if (op.success === true) {
-          openNotification({
-            message: op.message,
-            type: 'success',
-            duration: 0
-          })
+          // openNotification({
+          //   message: op.message,
+          //   type: 'success',
+          //   duration: 0
+          // })
           console.info(ipcRenderer.sendSync('getDBS'))
           op.dbs = Number(ipcRenderer.sendSync('sendCommand', "CONFIG", ["GET", "databases"])[1])
           this.$emit('isConnected', op);
         } else {
-          openNotification({
-            message: op.message,
-            type: 'danger',
-            duration: 0
-          })
+          // openNotification({
+          //   message: op.message,
+          //   type: 'danger',
+          //   duration: 0
+          // })
         }
 
 
@@ -145,8 +145,7 @@
       }
     },
     components: {
-      Modal,
-      Notification
+      Modal
     },
     created() {
       // Set $route values that are not preset during unit testing

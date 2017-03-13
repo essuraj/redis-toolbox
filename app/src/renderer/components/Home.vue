@@ -1,21 +1,22 @@
 <template>
-    <div>
+    <div class="bg">
         <div class="container is-fluid is-multiline">
+        <br/>
             <nav-bar v-on:isConnected="loadMain" v-on:search="showSearch"></nav-bar>
-            <div class="columns">
+        <br/>
+            <div class="columns"  v-if="isConnected">
                 <div class="column tree">
                     <collapse>
-                        <collapse-item v-bind:title="'DB '+ (n-1)" v-for="n in dbs" :key="n" v-on:open="getKeys(n-1)">
-                            <a class="panel-block" v-for="a in keys[(n-1)]" :key="a" >
-    <span class="panel-icon">
+                        <collapse-item v-bind:title="key" v-for="(value, key) in dbs" :key="key" v-on:open="getKeys(key)">
+                            <a class="panel-block" v-for="a in value" :key="a">
+                                <span class="panel-icon">
       <i class="fa fa-book"></i>
-    </span>
-    {{a}}
-  </a>
-                            
+    </span> {{a}}
+                            </a>
+
                         </collapse-item>
                     </collapse>
-               </div>
+                </div>
                 <div class="column is-three-quarters">
                     <div class="box">
                         <p class="title is-5">is-three-quarters {{isConnected}} {{data}}</p>
@@ -26,10 +27,14 @@
     </div>
 
 </template>
-<style scoped>
-.tree .card-content,.tree .card-content-box{
-    padding:0
-}
+<style >
+    .tree .card-content,
+    .tree .card-content-box {
+        padding: 0 !important
+    }
+    .bg{
+        background:#f3f3f3
+    }
 </style>
 <script>
     import NavBar from './sections/NavBar'
@@ -48,7 +53,7 @@
                 isConnected: false,
                 dbs: [],
                 data: {},
-                keys:[]
+                keys: []
             }
 
         },
@@ -62,7 +67,11 @@
             loadMain: function (status) {
                 this.isConnected = status.success
                 if (status.success === true) {
-                    this.dbs = status.dbs
+                    let db = {};
+                    for (let i = 0; i < status.dbs; i++) {
+                        db[`DB-${i}`]=[];
+                    }
+                    this.dbs = db
                 }
 
             },
@@ -70,11 +79,11 @@
                 this.data = status
 
             },
-            getKeys: function (dbNumber) {
-                console.log(dbNumber,this.keys)
- var res = ipcRenderer.sendSync('sendCommand', "SCAN", [dbNumber.toString()])
- console.log(res)
- this.keys[dbNumber]=res[1];
+            getKeys: function (db) {
+                console.log(db,  this.dbs)
+                var res = ipcRenderer.sendSync('sendCommand', "SCAN", [db.split('-')[1]])
+                console.info(res)
+                this.dbs[db] = res[1];
             }
         }
     }
