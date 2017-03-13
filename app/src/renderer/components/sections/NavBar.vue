@@ -31,7 +31,7 @@
       <div class="card">
         <header class="card-header">
           <p class="card-header-title">
-            Redis Server Connection wizard - {{host}} {{isConnected}}
+            Redis Server Connection wizard - {{host}}
           </p>
         </header>
         <div class="card-content">
@@ -44,11 +44,14 @@
               <input class="input" type="password" v-model="password" placeholder="password">
               <span class="icon is-small">    <i class="fa fa-lock"></i>  </span>
             </p>
+            <p v-bind:class="{ 'help is-success': isConnected,'help is-danger':isConnected===false }">
+              <i v-bind:class="{ 'fa fa-check': isConnected,'fa fa-exclamation-triangle':isConnected===false }"></i> {{connectMessage}}
+            </p>
           </div>
+
         </div>
         <footer class="card-footer">
-          <a class="card-footer-item is-primary" @click="testRedisConnection">
-          <i class="fa fa-check success" v-if="isConnected===true"></i> 
+          <a class="card-footer-item" @click="testRedisConnection">
           Test</a>
           <a class="card-footer-item" @click="closeModalBasic">Cancel</a>
           <a class="card-footer-item is-success">Save</a>
@@ -89,7 +92,8 @@
   export default {
     data() {
       return {
-        isConnected: false,
+        isConnected: undefined,
+        connectMessage: undefined,
         showModal: false,
         host: 'localhost:6379',
         password: "",
@@ -107,6 +111,7 @@
         let op = ipcRenderer.sendSync('testRedisConnection', this.host, this.password);
         console.log(op, this.host, this.password)
         this.isConnected = op.success;
+        this.connectMessage = op.message;
         if (op.success === true) {
           openNotification({
             message: op.message,

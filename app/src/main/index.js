@@ -15,22 +15,31 @@ let mainWindow
 export var client
 
 ipcMain.on('testRedisConnection', function (event, host, password) {
-  let config = {
-    host: host.split(':')[0],
-    port: host.split(':')[1]
-  }
-  if (password) {
-    config.password = password
-  }
-  client = redis.createClient(config)
-  client.on('error', function (err) {
-    console.log('Error ' + err)
-    event.returnValue = {
-      success: true,
-      message: "Connect error",
-      data: err
+  try {
+    let config = {
+      host: host.split(':')[0],
+      port: host.split(':')[1]
     }
-  })
+    if (password) {
+      config.password = password
+    }
+    client = redis.createClient(config)
+    client.on('error', function (err) {
+      console.log('Error ' + err)
+      event.returnValue = {
+        success: false,
+        message: "Connect error",
+        data: err
+      }
+    })
+  } catch (error) {
+    console.log('Error ' + error)
+    event.returnValue = {
+      success: false,
+      message: "Connect error",
+      data: error
+    }
+  }
   client.on('ready', function () {
     console.log('ready')
     event.returnValue = {
@@ -51,15 +60,15 @@ ipcMain.on('getDBS', async function (event) {
 ipcMain.on('sendCommand', async function (event, command, arg) {
   try {
     client.sendCommandAsync(command, arg, (err, res) => {
-    if (err)
-      console.error(err)
-    event.returnValue = res;
-  })
+      if (err)
+        console.error(err)
+      event.returnValue = res;
+    })
   } catch (error) {
     event.returnValue = error;
-    
+
   }
- 
+
 
 })
 
