@@ -13,7 +13,7 @@
       </span>
       <div class="nav-center" v-if="isConnected">
 
-        <p class="control has-addons nav-item">
+        <p class="control has-addons nav-item  is-expanded">
           <input class="input" type="text" placeholder="redis command" v-model="command">
           <a class="button is-info" @click="tryRedisCommand">
     Execute

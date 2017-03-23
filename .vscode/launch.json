@@ -8,7 +8,7 @@
             "request": "attach",
             "name": "Attach (Legacy Protocol)",
             "port": 5858,
-            "protocol": "legacy"
+            "protocol": "auto"
         }
     ]
 }

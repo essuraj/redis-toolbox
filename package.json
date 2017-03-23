@@ -63,12 +63,14 @@
     "webpack-dev-server": "^2.3.0"
   },
   "dependencies": {
+    "@types/redis": "^0.12.36",
     "bluebird": "^3.5.0",
     "bulma": "^0.3.2",
     "font-awesome": "^4.7.0",
     "redis": "^2.6.5",
     "vue-bulma-collapse": "^1.0.3",
     "vue-bulma-modal": "^1.0.1",
-    "vue-bulma-notification": "^1.1.1"
+    "vue-bulma-notification": "^1.1.1",
+    "vue-bulma-tabs": "^1.1.2"
   }
 }
