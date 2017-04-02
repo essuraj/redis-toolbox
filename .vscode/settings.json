@@ -7,32 +7,5 @@
         "**/CVS": true,
         "**/.DS_Store": true,
         "node_modules":true
-    },
-    "beautify.language": {
-        "js": {
-            "type": [
-                "javascript",
-                "json" 
-            ],
-            "filename": [
-                ".vue",
-                ".jshintrc",
-                ".jsbeautify"
-            ]
-        },
-        "css": [
-            "css",
-            "scss"
-        ],
-        "html": [
-            "htm",
-            "html",
-            "vue-html",
-            "vue"
-        ]
-    },
-    "emmet.syntaxProfiles": {
-        "vue-html": "html",
-        "vue": "html"
     }
 }
